@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  celestia:
+    container_name: ${CELESTIA_NODE_TYPE?Variable not set}
+    privileged: true
+    network_mode: host
+    image: ghcr.io/celestiaorg/celestia-node:${CELESTIA_NODE_VERSION?Variable not set}
+    restart: unless-stopped
+    environment:
+      - NODE_TYPE=${CELESTIA_NODE_TYPE?Variable not set}
+      - P2P_NETWORK=blockspacerace
+    volumes:
+      - ./.celestia-data:/home/celestia/
+    command: celestia bridge start --keyring.accname ${KEY_NAME?Variable not set} --core.ip ${IP_ADDRESS?Variable not set} --gateway --gateway.addr 127.0.0.1 --gateway.port 26659 --p2p.network blockspacerace --metrics.tls=false --metrics --metrics.endpoint otel.celestia.tools:4318
