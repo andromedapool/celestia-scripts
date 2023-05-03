@@ -12,4 +12,4 @@ services:
       - P2P_NETWORK=blockspacerace
     volumes:
       - ./.celestia-data:/home/celestia/
-    command: celestia bridge start --keyring.accname ${KEY_NAME?Variable not set} --core.ip ${IP_ADDRESS?Variable not set} --gateway --gateway.addr 127.0.0.1 --gateway.port 26659 --p2p.network blockspacerace --metrics.tls=false --metrics --metrics.endpoint otel.celestia.tools:4318
+    command: celestia bridge start --keyring.accname ${KEYRING?Variable not set} --core.ip ${IP_ADDRESS?Variable not set} --gateway --gateway.addr 127.0.0.1 --gateway.port 26659 --p2p.network blockspacerace --metrics.tls=false --metrics --metrics.endpoint otel.celestia.tools:4318
